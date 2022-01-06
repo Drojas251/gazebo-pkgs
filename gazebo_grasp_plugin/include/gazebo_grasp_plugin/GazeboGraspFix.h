@@ -101,13 +101,18 @@ class GazeboGraspFix : public ModelPlugin
     /**
      * Gets called just after the object has been attached to the palm link on \e armName
      */
-    void OnAttach(const std::string &objectName,
-                          const std::string &armName);
+
+    /* DEVEL ISSUE 1: Commenting this out for now until I work out custom gazebo messages with ament_make */
+    /*void OnAttach(const std::string &objectName,
+                          const std::string &armName);*/
+
     /**
      * Gets called just after the object has been detached to the palm link on \e armName
      */
-    void OnDetach(const std::string &objectName,
-                          const std::string &armName);
+
+    /* DEVEL ISSUE 1: Commenting this out for now until I work out custom gazebo messages with ament_make */
+    /*void OnDetach(const std::string &objectName,
+                          const std::string &armName);*/
 
     virtual void Init();
     virtual void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
@@ -190,7 +195,10 @@ class GazeboGraspFix : public ModelPlugin
 
     event::ConnectionPtr update_connection;
     transport::NodePtr node;
-    transport::PublisherPtr eventsPub;   // publisher of grasping events
+
+    /* DEVEL ISSUE 1: Commenting this out for now until I work out custom gazebo messages with ament_make */
+    //transport::PublisherPtr eventsPub;   // publisher of grasping events
+
     transport::SubscriberPtr contactSub; // subscriber to contact updates
 
     // tolerance (in degrees) between force vectors to

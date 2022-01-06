@@ -8,7 +8,8 @@
 #include <gazebo_grasp_plugin/GazeboGraspFix.h>
 #include <gazebo_version_helpers/GazeboVersionHelpers.h>
 
-#include <msgs/grasp_event.pb.h>
+/* DEVEL ISSUE 1: Commenting this out for now until I work out custom gazebo messages with ament_make */
+//#include <msgs/grasp_event.pb.h>
 
 using gazebo::GazeboGraspFix;
 using gazebo::GzVector3;
@@ -281,8 +282,10 @@ void GazeboGraspFix::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
                        this, latching);
   }
 
-  gzmsg << "Advertising grasping events on topic grasp_events" << std::endl;
-  this->eventsPub = this->node->Advertise<msgs::GraspEvent>("~/grasp_events");
+  /* DEVEL ISSUE 1: Commenting this out for now until I work out custom gazebo messages with ament_make */
+
+  //gzmsg << "Advertising grasping events on topic grasp_events" << std::endl;
+  //this->eventsPub = this->node->Advertise<msgs::GraspEvent>("~/grasp_events");
 
   update_connection = event::Events::ConnectWorldUpdateEnd(boost::bind(
                         &GazeboGraspFix::OnUpdate, this));
@@ -664,7 +667,9 @@ void GazeboGraspFix::OnUpdate()
       gzerr << "GazeboGraspFix: Could not attach object " << objName << " to gripper "
             << graspingGripperName << std::endl;
     }
-    this->OnAttach(objName, graspingGripperName);
+    /* DEVEL ISSUE 1: Commenting this out for now until I work out custom gazebo messages with ament_make */
+    //this->OnAttach(objName, graspingGripperName);
+
   }  // for all objects
 
 
@@ -802,7 +807,9 @@ void GazeboGraspFix::OnUpdate()
       gzmsg << "GazeboGraspFix: Detaching " << objName << " from gripper " <<
             graspingGripperName << "." << std::endl;
       graspingGripper.HandleDetach(objName);
-      this->OnDetach(objName, graspingGripperName);
+
+      /* DEVEL ISSUE 1: Commenting this out for now until I work out custom gazebo messages with ament_make */
+      //this->OnDetach(objName, graspingGripperName);
       gripCntIt->second = 0;
       this->attachGripContacts.erase(initCollIt);
     }
@@ -960,6 +967,10 @@ void GazeboGraspFix::OnContact(const ConstContactsPtr &_msg)
   }
 }
 
+/* DEVEL ISSUE 1: Commenting this out for now until I work out custom gazebo messages with ament_make */
+
+/*
+
 void GazeboGraspFix::OnAttach(const std::string &objectName,
                               const std::string &armName)
 {
@@ -979,3 +990,4 @@ void GazeboGraspFix::OnDetach(const std::string &objectName,
   event.set_attached(false);
   eventsPub->Publish(event);
 }
+*/
